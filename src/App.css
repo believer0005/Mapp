@@ -1,42 +1,218 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+}
+
+
+.navbar-dark .nav-item .nav-link {
+  color: #fff;
+}
+
+.navbar-dark .nav-item .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.fa-li {
+  position: relative;
+  left: 0;
+}
+
+.main-div {
+  max-width: 140rem;
+  margin: 0 auto;
+  padding: 3rem;
+  
+}
+
+.grid {
+  /* width: 100%; */
+  display: grid;
+  gap: 3rem;
+}
+
+.grid-4-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.Mcard{
+  position: relative;
+  width: 320px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.Mcard .imgBx{
+  position: relative;
+  width: 100%;
+  height: 240px;
+  background: #fff;
+  border-radius: 15px;
+}
+
+.Mcard .imgBx::before{
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -10px 10px 0 #82848f;
+}
+
+.Mcard .imgBx::after{
+  content: " ";
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -10px 10px 0 #82848f;
+}
+
+
+.Mcard .content{
+  position: relative;
+  width: 100%;
+  height: 150px;
+  background: #333;
+  border-radius: 15px;
+  border-top-left-radius: 0;
+  padding: 10px 0px 0px 20px;
+  color: #fff;
+}
+
+.Mcard .content .icon{
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.Mcard .content .icon button{
+  font-size: 2rem;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.Mcard .content .icon button:focus{
+  color: red;
+}
+
+.Mcard .content .episode-season{
+  position: absolute;
+  top: -80px;
+  left: 0;
+  height: 80px;
+  width: 50%;
+  background: #333;
+  border-top: 10px solid #82848f;
+  border-right: 10px solid #82848f;
+  border-top-right-radius: 25px;
+}
+
+.Mcard .content .episode-season::before{
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -10px -10px 0 #82848f;
+}
+
+.Mcard .content .episode-season::after{
+  content: '';
+  position: absolute;
+  bottom:0;
+  right: -25px;
+  width: 25px;
+  height: 25px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -10px 10px 0 #333;
+}
+
+.Mcard .content .episode-season .season{
+  position: relative;
+  background: #fff;
+  padding: 5px ;
+  margin: 15px 15px;
+  display: block;
+  border-radius: 7px;
+  color: #232949;
+  font-weight: 900;
+  text-decoration: none;
   text-align: center;
+  font-size: 15px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+
+/* responsive code   */
+@media (max-width: 1200px) {
+  .container {
+    margin: auto;
+    max-width: 110rem;
   }
-  to {
-    transform: rotate(360deg);
+  .grid-4-col {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 998px) {
+  .container {
+    max-width: 90rem;
+    margin: auto;
+  }
+  .grid-4-col {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  input {
+    width: 25rem;
+  }
+
+  .movie-section {
+    height: auto;
+    padding: 4.8rem 0;
+  }
+
+  .movie-Mcard {
+    grid-template-columns: 1fr;
+  }
+
+  .Mcard-content {
+    padding-left: 2rem;
+  }
+
+  .back-btn {
+    margin-bottom: 3rem;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+@media (max-width: 768px) {
+  .container {
+    max-width: 70rem;
+    margin: auto;
+  }
+  .grid-4-col {
+    grid-template-columns: 1fr;
+  }
 }

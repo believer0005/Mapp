@@ -14,128 +14,199 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: { input: any; output: any; }
 };
 
-export type Continent = {
-  __typename?: 'Continent';
-  code: Scalars['ID']['output'];
-  countries: Array<Country>;
-  name: Scalars['String']['output'];
+export enum CacheControlScope {
+  Private = 'PRIVATE',
+  Public = 'PUBLIC'
+}
+
+export type Character = {
+  __typename?: 'Character';
+  /** Time at which the character was created in the database. */
+  created?: Maybe<Scalars['String']['output']>;
+  /** Episodes in which this character appeared. */
+  episode: Array<Maybe<Episode>>;
+  /** The gender of the character ('Female', 'Male', 'Genderless' or 'unknown'). */
+  gender?: Maybe<Scalars['String']['output']>;
+  /** The id of the character. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /**
+   * Link to the character's image.
+   * All images are 300x300px and most are medium shots or portraits since they are intended to be used as avatars.
+   */
+  image?: Maybe<Scalars['String']['output']>;
+  /** The character's last known location */
+  location?: Maybe<Location>;
+  /** The name of the character. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** The character's origin location */
+  origin?: Maybe<Location>;
+  /** The species of the character. */
+  species?: Maybe<Scalars['String']['output']>;
+  /** The status of the character ('Alive', 'Dead' or 'unknown'). */
+  status?: Maybe<Scalars['String']['output']>;
+  /** The type or subspecies of the character. */
+  type?: Maybe<Scalars['String']['output']>;
 };
 
-export type ContinentFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
+export type Characters = {
+  __typename?: 'Characters';
+  info?: Maybe<Info>;
+  results?: Maybe<Array<Maybe<Character>>>;
 };
 
-export type Country = {
-  __typename?: 'Country';
-  awsRegion: Scalars['String']['output'];
-  capital?: Maybe<Scalars['String']['output']>;
-  code: Scalars['ID']['output'];
-  continent: Continent;
-  currencies: Array<Scalars['String']['output']>;
-  currency?: Maybe<Scalars['String']['output']>;
-  emoji: Scalars['String']['output'];
-  emojiU: Scalars['String']['output'];
-  languages: Array<Language>;
-  name: Scalars['String']['output'];
-  native: Scalars['String']['output'];
-  phone: Scalars['String']['output'];
-  phones: Array<Scalars['String']['output']>;
-  states: Array<State>;
-  subdivisions: Array<Subdivision>;
+export type Episode = {
+  __typename?: 'Episode';
+  /** The air date of the episode. */
+  air_date?: Maybe<Scalars['String']['output']>;
+  /** List of characters who have been seen in the episode. */
+  characters: Array<Maybe<Character>>;
+  /** Time at which the episode was created in the database. */
+  created?: Maybe<Scalars['String']['output']>;
+  /** The code of the episode. */
+  episode?: Maybe<Scalars['String']['output']>;
+  /** The id of the episode. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /** The name of the episode. */
+  name?: Maybe<Scalars['String']['output']>;
 };
 
-
-export type CountryNameArgs = {
-  lang?: InputMaybe<Scalars['String']['input']>;
+export type Episodes = {
+  __typename?: 'Episodes';
+  info?: Maybe<Info>;
+  results?: Maybe<Array<Maybe<Episode>>>;
 };
 
-export type CountryFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
-  continent?: InputMaybe<StringQueryOperatorInput>;
-  currency?: InputMaybe<StringQueryOperatorInput>;
-  name?: InputMaybe<StringQueryOperatorInput>;
+export type FilterCharacter = {
+  gender?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  species?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Language = {
-  __typename?: 'Language';
-  code: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-  native: Scalars['String']['output'];
-  rtl: Scalars['Boolean']['output'];
+export type FilterEpisode = {
+  episode?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type LanguageFilterInput = {
-  code?: InputMaybe<StringQueryOperatorInput>;
+export type FilterLocation = {
+  dimension?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Info = {
+  __typename?: 'Info';
+  /** The length of the response. */
+  count?: Maybe<Scalars['Int']['output']>;
+  /** Number of the next page (if it exists) */
+  next?: Maybe<Scalars['Int']['output']>;
+  /** The amount of pages. */
+  pages?: Maybe<Scalars['Int']['output']>;
+  /** Number of the previous page (if it exists) */
+  prev?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Location = {
+  __typename?: 'Location';
+  /** Time at which the location was created in the database. */
+  created?: Maybe<Scalars['String']['output']>;
+  /** The dimension in which the location is located. */
+  dimension?: Maybe<Scalars['String']['output']>;
+  /** The id of the location. */
+  id?: Maybe<Scalars['ID']['output']>;
+  /** The name of the location. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** List of characters who have been last seen in the location. */
+  residents: Array<Maybe<Character>>;
+  /** The type of the location. */
+  type?: Maybe<Scalars['String']['output']>;
+};
+
+export type Locations = {
+  __typename?: 'Locations';
+  info?: Maybe<Info>;
+  results?: Maybe<Array<Maybe<Location>>>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  continent?: Maybe<Continent>;
-  continents: Array<Continent>;
-  countries: Array<Country>;
-  country?: Maybe<Country>;
-  language?: Maybe<Language>;
-  languages: Array<Language>;
+  /** Get a specific character by ID */
+  character?: Maybe<Character>;
+  /** Get the list of all characters */
+  characters?: Maybe<Characters>;
+  /** Get a list of characters selected by ids */
+  charactersByIds?: Maybe<Array<Maybe<Character>>>;
+  /** Get a specific episode by ID */
+  episode?: Maybe<Episode>;
+  /** Get the list of all episodes */
+  episodes?: Maybe<Episodes>;
+  /** Get a list of episodes selected by ids */
+  episodesByIds?: Maybe<Array<Maybe<Episode>>>;
+  /** Get a specific locations by ID */
+  location?: Maybe<Location>;
+  /** Get the list of all locations */
+  locations?: Maybe<Locations>;
+  /** Get a list of locations selected by ids */
+  locationsByIds?: Maybe<Array<Maybe<Location>>>;
 };
 
 
-export type QueryContinentArgs = {
-  code: Scalars['ID']['input'];
+export type QueryCharacterArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
-export type QueryContinentsArgs = {
-  filter?: InputMaybe<ContinentFilterInput>;
+export type QueryCharactersArgs = {
+  filter?: InputMaybe<FilterCharacter>;
+  page?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryCountriesArgs = {
-  filter?: InputMaybe<CountryFilterInput>;
+export type QueryCharactersByIdsArgs = {
+  ids: Array<Scalars['ID']['input']>;
 };
 
 
-export type QueryCountryArgs = {
-  code: Scalars['ID']['input'];
+export type QueryEpisodeArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
-export type QueryLanguageArgs = {
-  code: Scalars['ID']['input'];
+export type QueryEpisodesArgs = {
+  filter?: InputMaybe<FilterEpisode>;
+  page?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryLanguagesArgs = {
-  filter?: InputMaybe<LanguageFilterInput>;
+export type QueryEpisodesByIdsArgs = {
+  ids: Array<Scalars['ID']['input']>;
 };
 
-export type State = {
-  __typename?: 'State';
-  code?: Maybe<Scalars['String']['output']>;
-  country: Country;
-  name: Scalars['String']['output'];
+
+export type QueryLocationArgs = {
+  id: Scalars['ID']['input'];
 };
 
-export type StringQueryOperatorInput = {
-  eq?: InputMaybe<Scalars['String']['input']>;
-  in?: InputMaybe<Array<Scalars['String']['input']>>;
-  ne?: InputMaybe<Scalars['String']['input']>;
-  nin?: InputMaybe<Array<Scalars['String']['input']>>;
-  regex?: InputMaybe<Scalars['String']['input']>;
+
+export type QueryLocationsArgs = {
+  filter?: InputMaybe<FilterLocation>;
+  page?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type Subdivision = {
-  __typename?: 'Subdivision';
-  code: Scalars['ID']['output'];
-  emoji?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
+
+export type QueryLocationsByIdsArgs = {
+  ids: Array<Scalars['ID']['input']>;
 };
 
-export type GetDataQueryVariables = Exact<{ [key: string]: never; }>;
+export type Epi_QueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetDataQuery = { __typename?: 'Query', continents: Array<{ __typename?: 'Continent', name: string }> };
+export type Epi_QueryQuery = { __typename?: 'Query', episodes?: { __typename?: 'Episodes', results?: Array<{ __typename?: 'Episode', name?: string | null, episode?: string | null, air_date?: string | null } | null> | null } | null };
 
 
-export const GetDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"continents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetDataQuery, GetDataQueryVariables>;
+export const Epi_QueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Epi_query"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"episodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"episode"}},{"kind":"Field","name":{"kind":"Name","value":"air_date"}}]}}]}}]}}]} as unknown as DocumentNode<Epi_QueryQuery, Epi_QueryQueryVariables>;

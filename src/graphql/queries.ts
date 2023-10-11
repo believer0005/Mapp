@@ -1,10 +1,13 @@
 import { gql } from "../__generated__/gql";
 
-
-export const GET_LOCATIONS = gql(`
-  query GetData {
-    continents {
+export const RICK_MOERTY = gql(`
+query Epi_query{
+  episodes {
+    results {
       name
+      episode
+      air_date
     }
   }
+}
 `);

@@ -1,0 +1,49 @@
+.sideBar{
+    width: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    height: 95vh;
+    transition: all 2s;
+    top: 60px;
+    left: -100%;
+    z-index: 1000;
+    border-top-right-radius:20px ;
+    text-align: center;
+    color: #ffff;
+}
+
+.sideBar.active{
+    left: 0;
+}
+
+.bookmark{
+    width: 400px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    height: 95vh;
+    transition: all 2s;
+    top: 60px;
+    right: -100%;
+    z-index: 1000;
+    border-top-left-radius:20px ;
+    text-align: center;
+    color: #ffff;
+}
+
+.bookmark.active{
+    right: 0;
+}
+
+.sideBar .sideFooter{
+    margin-top: 500px;
+    margin-left: 300px;
+    color: #ffff;
+    border: 2px solid #fff;
+}
+.bookmark .bookFooter{
+    margin-top: 500px;
+    margin-right: 300px;
+    color: #ffff;
+    border: 2px solid #fff;
+}
+
